@@ -43,7 +43,7 @@ const actions = {
     fetchWeather(context, id) {
 
         context.commit("LOADING_PENDING");
-        axios.get('/api/weather', {
+        axios.get('https://weather-app-nine-alpha-95.vercel.app/weather', {
             params: {
                 id: id
             }
