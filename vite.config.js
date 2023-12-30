@@ -6,13 +6,14 @@ import fs from 'fs';
 
 
 const projectRootDir = resolve(__dirname);
+const API_TARGET = process.env.VITE_API_TARGET || 'http://localhost:3001';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
+        target: API_TARGET,
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
