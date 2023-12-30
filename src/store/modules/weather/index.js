@@ -10,7 +10,12 @@ const state = {
 
     // App
     savedCities: [
+        {
+            "id": 2078025,
+            "name": "Adelaide",
+        }
     ]
+
 }
 
 const mutations = {

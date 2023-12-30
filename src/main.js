@@ -3,12 +3,13 @@ import './style.css';
 import App from './App.vue'
 import router from './router';
 import store from './store';
+import VueLoaders from 'vue-loaders';
 
 
 const app = createApp(App);
 
 app.use(store);
-
+app.use(VueLoaders);
 app.use(router);
 app.mount('#app');
 

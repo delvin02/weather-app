@@ -13,10 +13,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "epic-spinners": "^2.0.0",
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
     "vercel": "^33.0.1",
-    "vue": "^3.3.11"
+    "vue": "^3.3.11",
+    "vue-loaders": "^4.1.4",
+    "vue-simple-spinner": "^1.2.10"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.0",

@@ -36,7 +36,7 @@
             v-for="city in savedCities"
             :to="'/weather/' + city.id"
             :key="city.id"
-            :class="[ 'p-3', 'm-3', 'grow', 'rounded-lg', 'shadow-lg', 'w-1/3', $route.path === '/weather/' + city.id ? '' : 'inactive' ]"
+            :class="[ 'p-3', 'm-3', 'grow', 'rounded-lg', 'shadow-lg', 'w-1/3', 'font-medium', 'hover:bg-apple-400', $route.path === '/weather/' + city.id ? '' : 'inactive' ]"
             >
             {{ city.name }} 
           </router-link>
