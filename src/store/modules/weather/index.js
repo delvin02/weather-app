@@ -43,7 +43,7 @@ const actions = {
     fetchWeather(context, id) {
 
         context.commit("LOADING_PENDING");
-        axios.get('https://openweather-psi.vercel.app//weather', {
+        axios.get('https://openweather-psi.vercel.app/weather', {
             params: {
                 id: id
             }
