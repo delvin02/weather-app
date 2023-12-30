@@ -4,7 +4,7 @@ import axios from 'axios';
 const WEATHER_API_KEY = "2fc0a80c190dff7c1db9efee7c0f7211";
 
 const app = express();
-//const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 
 app.get('/weather', (req, res) => {
@@ -25,6 +25,6 @@ app.get('/weather', (req, res) => {
         });
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`);
 });
