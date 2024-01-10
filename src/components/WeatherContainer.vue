@@ -56,7 +56,7 @@ export default {
             'savedCities'
         ]),
         isCitySaved() {
-            return  this.savedCities.some(city => city.id == Number(this.id));
+            return this.savedCities.some(city => city.id == Number(this.id));
         }
     },
     methods: {
@@ -71,8 +71,9 @@ export default {
         }
     },
     created() {
+        // created() hook invokes the same fetchWeather() method when the component
+        // loads for the first time
         this.fetchWeather();
-
     },
     watch: {
         error(newValue) {
@@ -80,6 +81,8 @@ export default {
                 this.$router.push({ path: '/404', query: { error: newValue } });
             }
         },
+        // id is dynamically linked to the route id param
+        // when any changes to the route occurs, the method will be called
         id() {
             this.fetchWeather();
         }

@@ -9,7 +9,7 @@ describe("HomeContainer.vue", () => {
         expect(
             wrapper.html()
         ).contain(
-            '<h1 class="text-xl">Pick a city below to see the weather!</h1>'
+            '<h1 class="font-bold uppercase text-apple-600 text-2xl leading-relaxed p-4 bg-apple-100">Click the search icon below to see the weather!</h1>'
         );
     });
 });

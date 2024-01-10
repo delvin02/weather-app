@@ -75,9 +75,8 @@ const actions = {
                 // Optionally, commit a mutation to update the state
                 context.commit('SET_ERROR', "Location couldn't be retrieved.");
 
-                // Update loading state
         });
-        context.commit('LOADING_COMPLETE');
+        //context.commit('LOADING_COMPLETE');
     },
     addCity(context, data) {
         console.log(data);
