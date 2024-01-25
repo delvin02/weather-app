@@ -76,7 +76,7 @@ const actions = {
                 context.commit('SET_ERROR', "Location couldn't be retrieved.");
 
         });
-        //context.commit('LOADING_COMPLETE');
+        context.commit('LOADING_COMPLETE');
     },
     addCity(context, data) {
         console.log(data);

@@ -6,7 +6,7 @@
             </div>
             <div v-if="!loading" class="weather container mx-auto">
 
-                <div class="flex justify-between ">
+                <div class="flex justify-between">
 
                     <div class="p-5">
 
