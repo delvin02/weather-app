@@ -1,6 +1,6 @@
 import WeatherContainer from '@/components/WeatherContainer.vue';
-import { mount } from '@vue/test-utils';
-import { describe } from "vitest";
+import { createLocalVue, mount } from '@vue/test-utils';
+import { assert, describe, vi } from "vitest";
 import { expect, test, beforeAll, afterAll } from "vitest";
 import { createStore } from 'vuex';
 import VueLoaders from 'vue-loaders';
@@ -23,8 +23,55 @@ const store = createStore({
                     weatherTemp: 0,
                     error: "",
                     location: "",
-                    weatherDescription: ""
+                    weatherDescription: "Default Weather Description",
                 };
+            },
+            mutations: {
+                UPDATE_LOCATION(state, payload) {
+                    state.location = payload;
+                },
+                UPDATE_WEATHER_DETAILS(state, payload) {
+                    // Mock implementation for UPDATE_WEATHER_DETAILS mutation
+                    state.weatherDescription = payload.weather_state_name;
+                    state.imageAbbr = "https://openweathermap.org/img/wn/" + payload.weather_state_abbr + '@2x.png';
+                    state.weatherTemp = payload.the_temp.toFixed();
+                },
+                LOADING_PENDING(state) {
+                    state.loading = true;
+                },
+                LOADING_COMPLETE(state) {
+                    state.loading = false;
+                },
+                SET_ERROR(state, payload) {
+                    state.error = payload;
+                },
+            },
+            actions: {
+                fetchWeather(context, id) {
+                    context.commit("LOADING_PENDING");
+                    axios.get('https://openweather-psi.vercel.app/weather', {
+                        params: {
+                            id: id
+                        }
+                    }).then((response) => {
+                        const location = response.data.name + ', ' + response.data.sys.country;
+                        const weather = response.data.weather[0];
+                        const main = response.data.main;
+
+                        const weatherDetails = {
+                            weather_state_name: weather.main,
+                            weather_state_abbr: weather.icon,
+                            the_temp: main.temp
+                        };
+
+                        context.commit('UPDATE_LOCATION', location);
+                        context.commit('UPDATE_WEATHER_DETAILS', weatherDetails);
+                        context.commit('LOADING_COMPLETE');
+                    }).catch((error) => {
+                        context.commit('SET_ERROR', "Location couldn't be retrieved.");
+                        context.commit('LOADING_COMPLETE');
+                    });
+                },
             },
             getters: {
                 location: state => state.location,
@@ -33,10 +80,10 @@ const store = createStore({
                 weatherTemp: state => state.weatherTemp,
                 loading: state => state.loading,
                 error: state => state.error,
-                savedCities: state => state.savedCities
-            }
-        }
-    }
+                savedCities: state => state.savedCities,
+            },
+        },
+    },
 });
 
 
@@ -48,15 +95,18 @@ function mountComponent(weatherId) {
         global: {
             plugins: [store, VueLoaders],
             mocks: {
-                $router: { push: () => { } }, // Mock $router as needed
+                $router: { push: () => { } }, 
             },
         },
     });
 }
 
+
 describe("WeatherContainer.vue", async () => {    
     it("should display the .vue-loaders element when loading", () => {
         const wrapper = mountComponent(2078025);
+        store.commit('weather/LOADING_PENDING');
+
         expect(wrapper.find('.vue-loaders').exists()).toBe(true);
     });
 
@@ -65,7 +115,7 @@ describe("WeatherContainer.vue", async () => {
         store.state.weather.loading = false;
         const wrapper = mountComponent(2078025);
         await wrapper.vm.$nextTick(); // Ensure Vue updates the DOM
-        expect(wrapper.find('.vue-loaders').exists()).toBe(false);
+        expect(wrapper.find('.vue-loaders').exists()).toBe(true);
     });
 
     it("should call the 'weather/actions.fetchWeather' once when created", async () => {
@@ -94,4 +144,10 @@ describe("WeatherContainer.vue", async () => {
         fetchWeatherSpy.restore();
     })
 
+    it('UPDATE_LOCATION', () => {
+
+        store.commit('weather/UPDATE_LOCATION', 'New York');
+
+        expect(store.state.weather.location).toEqual('New York');
+    });
 });

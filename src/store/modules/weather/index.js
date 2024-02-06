@@ -79,7 +79,6 @@ const actions = {
         context.commit('LOADING_COMPLETE');
     },
     addCity(context, data) {
-        console.log(data);
         context.commit("LOADING_PENDING");
         const cityExists = context.state.savedCities.some(city => city.id === data.id);
         if (!cityExists) {
