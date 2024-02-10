@@ -1,7 +1,10 @@
-# Vue 3 + Vite
+# Weather Web-App
+#### Video Demo:  https://www.youtube.com/watch?v=asLfrF4qNqA 
+#### Description:
+Effortlessly find the weather through the web app! Simply input your desired location to receive current weather updates. For even quicker access, you have the option to save your frequently checked weather. And when you no longer need them, you can easily remove these saved locations at your convenience.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Aims: This project aims to enhance and strengthen my understanding of a simple frontend framework called Vue.Js by building a simple app on top of it.
 
-## Recommended IDE Setup
+Technologies used: OpenWeather API, Vercel, Vue.Js, TailwindCSS, Vite, Express
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Special thanks: OpenWeather API free access for making this app possible, Vercel for enabling me to host this app for free.
